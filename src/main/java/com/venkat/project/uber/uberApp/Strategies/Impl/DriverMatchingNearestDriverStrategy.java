@@ -2,6 +2,7 @@ package com.venkat.project.uber.uberApp.Strategies.Impl;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.venkat.project.uber.uberApp.Strategies.DriverMatchingStrategy;
@@ -20,7 +21,7 @@ public class DriverMatchingNearestDriverStrategy implements DriverMatchingStrate
 
 	@Override
 	public List<Driver> findMatchingDriver(RideRequest rideRequest) {
-		return driverRepository.findNearestDrivers(rideRequest.getPickupLocation());
+		return driverRepository.findTenNearestDrivers(rideRequest.getPickupLocation());
 	}
 }
 

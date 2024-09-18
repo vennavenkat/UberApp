@@ -9,7 +9,6 @@ import com.venkat.project.uber.uberApp.dto.RideRequestDto;
 import com.venkat.project.uber.uberApp.entities.Driver;
 import com.venkat.project.uber.uberApp.entities.RideRequest;
 
-@Service
 public class DriverMatchingHighestRatedDriverStrategy implements DriverMatchingStrategy{
 
 	@Override

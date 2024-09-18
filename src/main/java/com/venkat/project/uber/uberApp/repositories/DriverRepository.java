@@ -17,13 +17,16 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 	
 
 	//postgis is used in this query
-	@Query("SELECT d.*, ST_Distance(d.current_location, :pickupLocation) AS distance "  +
-			"FROM driver AS d " +
-			"where available = true AND ST_DWithin(d.current_location, :pickupLocation, 10000) " +
-			"ORDER BY distance " +
-			"LIMIT 10"
-			)
-	
-	List<Driver> findNearestDrivers(Point pickupLocation);
+//	@Query("SELECT d.*, ST_Distance(d.current_location, :pickupLocation) AS distance "  +
+//			"FROM drivers d " +
+//			"WHERE available = true AND ST_DWithin(d.current_location, :pickupLocation, 10000) " +
+//			"ORDER BY distance " +
+//			"LIMIT 10",nativeQuery = true)
+	@Query(value = "SELECT d.*, ST_Distance(d.current_location, :pickupLocation) AS distance " +
+            "FROM drivers d " +
+            "WHERE d.available = true AND ST_DWithin(d.current_location, :pickupLocation, 10000) " +
+            "ORDER BY distance " +
+            "LIMIT 10", nativeQuery = true)
+	List<Driver> findTenNearestDrivers(Point pickupLocation);
 
 }

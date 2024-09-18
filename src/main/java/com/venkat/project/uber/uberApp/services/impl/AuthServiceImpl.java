@@ -8,7 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.venkat.project.uber.uberApp.dto.DriverDto;
-import com.venkat.project.uber.uberApp.dto.SingupDto;
+import com.venkat.project.uber.uberApp.dto.SignupDto;
 import com.venkat.project.uber.uberApp.dto.UserDto;
 import com.venkat.project.uber.uberApp.entities.Rider;
 import com.venkat.project.uber.uberApp.entities.User;
@@ -35,13 +35,12 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public UserDto singup(SingupDto signupDto) {
+	public UserDto signup(SignupDto signupDto) {
 		
-		userRepository.findByEmail(signupDto.getEmail()).orElseThrow(() ->
-		new RuntimeConflictException("Cannot signup, User already exists with email" + signupDto.getEmail()));
-//		if(user != null) {
-//			throw new RuntimeException("Cannot signup, User already exists with email" + signupDto.getEmail());
-//		}
+		User user = userRepository.findByEmail(signupDto.getEmail()).orElse(null);
+		if(user != null) {
+			throw new RuntimeException("Cannot signup, User already exists with email" + signupDto.getEmail());
+		}
 		User mappedUser = modelMapper.map(signupDto, User.class);
 		mappedUser.setRoles(Set.of(Role.RIDER));
 		User savedUser = userRepository.save(mappedUser);
