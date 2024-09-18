@@ -29,6 +29,8 @@ public class Driver {
 	
 	private Boolean available;
 	
+	private String vehicleId;
+	
 	//this used for the location sphere hard coded
 	@Column(columnDefinition = "Geometry(Point, 4326)")
 	Point currentLocation;

@@ -24,19 +24,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RideRequestDto {
-	
-	private Long id;
-	private Point pickupLocation;
-	
-	private Point dropOffLOcation;
-	
-	private LocalDateTime requestTime;
-	
-	private RiderDto rider;
-	
-	private PaymentMethod paymentMethod;
-	
-	private RideRequestStatus rideRequestStatus;
 
+	private Long id;
+	private PointDto pickupLocation;
+
+	private PointDto dropOffLocation;
+
+	private PaymentMethod paymentMethod;
+
+	private LocalDateTime requestTime;
+
+	private RiderDto rider;
+
+	private RideRequestStatus rideRequestStatus;
 
 }
