@@ -33,7 +33,7 @@ public class Driver {
 	
 	//this used for the location sphere hard coded
 	@Column(columnDefinition = "Geometry(Point, 4326)")
-	Point currentLocation;
+	private Point currentLocation;
 	
 	
 

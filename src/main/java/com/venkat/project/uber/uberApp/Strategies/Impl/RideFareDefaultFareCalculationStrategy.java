@@ -8,9 +8,8 @@ import com.venkat.project.uber.uberApp.services.DistanceService;
 
 import lombok.RequiredArgsConstructor;
 
-
-@Service
 @RequiredArgsConstructor
+@Service
 public class RideFareDefaultFareCalculationStrategy implements RideFareCalculationStrategy{
 	
 	private final DistanceService distanceService;

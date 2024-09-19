@@ -16,17 +16,25 @@ import com.venkat.project.uber.uberApp.entities.Driver;
 public interface DriverRepository extends JpaRepository<Driver, Long> {
 	
 
-	//postgis is used in this query
+	//postgis is used in this query ST_Distance and ST_DWithin
 //	@Query("SELECT d.*, ST_Distance(d.current_location, :pickupLocation) AS distance "  +
 //			"FROM drivers d " +
 //			"WHERE available = true AND ST_DWithin(d.current_location, :pickupLocation, 10000) " +
 //			"ORDER BY distance " +
 //			"LIMIT 10",nativeQuery = true)
 	@Query(value = "SELECT d.*, ST_Distance(d.current_location, :pickupLocation) AS distance " +
-            "FROM drivers d " +
+            "FROM driver d " +
             "WHERE d.available = true AND ST_DWithin(d.current_location, :pickupLocation, 10000) " +
             "ORDER BY distance " +
             "LIMIT 10", nativeQuery = true)
 	List<Driver> findTenNearestDrivers(Point pickupLocation);
+	
+	
+	@Query(value = "SELECT d.* " +
+					"FROM driver d" +
+					"WHERE d.available = true AND ST_DWithin(d.current_location, :pickupLocation, 15000)" +
+					"ORDER BY d.rating DESC " +
+					"LIMIT 10", nativeQuery = true)
+	List<Driver> findNearbyTopRatedDrivers(Point pickupLocation);
 
 }

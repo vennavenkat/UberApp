@@ -18,6 +18,7 @@ import com.venkat.project.uber.uberApp.repositories.UserRepository;
 import com.venkat.project.uber.uberApp.services.AuthService;
 import com.venkat.project.uber.uberApp.services.RiderService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -35,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
+	@Transactional
 	public UserDto signup(SignupDto signupDto) {
 		
 		User user = userRepository.findByEmail(signupDto.getEmail()).orElse(null);
